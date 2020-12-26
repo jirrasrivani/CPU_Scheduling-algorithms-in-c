@@ -1,0 +1,83 @@
+#include<stdio.h>
+int main()
+{
+    int n;
+    printf("Enter n");
+    scanf("%d",&n);
+    int pr[n];
+    int ar[n];
+    printf("Enter arrival times");
+    for(int i=0;i<n;i++)
+    {
+        pr[i]=i+1;
+        scanf("%d",&ar[i]);
+
+    }
+    int btime[n],rem[n];
+    printf("Enter burst times");
+    for(int i=0;i<n;i++)
+    {
+
+        scanf("%d",&btime[i]);
+        rem[i]=btime[i];
+    }
+
+    int comp[n],tat[n],wt[n];
+    for(int i=0;i<n;i++)
+    {
+        comp[i]=0;
+        tat[i]=0;
+        wt[i]=0;
+
+    }
+     int checksum=0,cum_t=0,temp_index=0;
+     while(checksum!=n)
+     {
+         int min=99999;
+         int f=0;
+         for(int i=0;i<n;i++)
+         {
+             if(rem[i]!=0 && ar[i]<=cum_t && min>rem[i])
+             {
+                 min=rem[i];
+                 temp_index=i;
+                 f=1;
+             }
+         }
+         if(f==0)
+         {
+             cum_t++;
+             //printf("*");
+             continue;
+         }
+
+
+
+         rem[temp_index]=rem[temp_index]-1;
+         cum_t=cum_t+1;
+         if(rem[temp_index]==0)
+         {
+             comp[temp_index]=cum_t;
+             checksum++;
+         }
+
+     }
+     int i=0;
+
+    for(i=0;i<n;i++)
+    {
+        tat[i]=comp[i]-ar[i];
+        wt[i]=tat[i]-btime[i];
+        if(wt[i]<0)
+            wt[i]=0;
+    }
+    printf("pro    ar     bti   com      tat      wait\n");
+    for(i=0;i<n;i++)
+    {
+        printf("%d      %d     %d   %d       %d         %d\n",pr[i],ar[i],btime[i],comp[i],tat[i],wt[i]);
+
+    }
+}
+
+
+
