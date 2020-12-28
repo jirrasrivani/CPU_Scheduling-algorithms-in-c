@@ -1,1 +1,2 @@
-# CPU_Scheduling-algorithms-in-c
+# CPU_schedulingalgo-in-c
+
